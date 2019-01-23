@@ -35,13 +35,42 @@ IP adderess and SSH ports:
 - run `sudo apt-get install python-sqlalchemy python-pip` - for sqlalchemy
 - export LC_ALL=C - forcing the application to use the defualt language 
 - run `sudo apt-get install git` - for git repository
-- 
-- !!!!!!!
-- export LC_ALL=C
-- sudo pip install oauth2client
-- sudo pip install requests
-- sudo pip install httplib2 
-- !!!!!!!!
 
-## Adding grader user:
+#### Here through many questions I asked on slack and to friends I realized the need to start a virtual machine because I noticed a consistant error of not having flask installed, so I did the follwing:
+(help from Ebtihal in slack community who provided me this link: https://github.com/chuanqin3/udacity-linux-configuration)
+- run `sudo pip install virtualenv` - install virtual machine
+- run `sudo virtualenv venv` - rename the virtual machine to venv
+- run `source venv/bin/activate` - activate the virtual machine
+- run `sudo chmod -R 777 venv` - give file access permissions
+- run inside the venv:
+  - `sudo apt-get install python-pip`
+  - `sudo pip install Flask`
+  - `sudo pip install httplib2 oauth2client sqlalchemy psycopg2 sqlalchemy_utils requests render_template redirect psslib`
+
+### Adding the grader user:
+- run `sudo adduser grader` and filled the password: `udacity`
+- run `sudo usermod -aG sudo grader` - giving grader permission to sudo
+- Now I moved to my local terminal to generate the key for grader to enable SSH:
+  - run `ssh-keygen`
+  - saved it and named it "udacityKey"
+  - open udacityKey.pub
+  - copy the SSH rsa key.
+- go back to the server terminal
+- run `sudo mkdir .ssh`
+- run `sudo touch .ssh/authorized_keys`
+- run `sudo nano .ssh/authorized_keys`
+- now I paste the public key I got from `udacityKey.pub`
+- change the file permissions and owner by running:
+  - `sudo chmod 700 /home/grader/.ssh`
+  - `sudo chmod 644 /home/grader/.ssh/authorized_keys`
+  - `sudo chown -R grader:udacity /home/grader/.ssh`
+- restart the SSH service `sudo service ssh restart`
+- now we can log in with grader using the following command on our local terminal:
+  - `ssh grader@54.85.177.225 -p 2200 -i ~/.ssh/udacityKey`
+
+### Disable the root login:
+- run `sudo nano /etc/ssh/sshd_config`
+- change: `PermitRootLogin without-password` to `PermitRootLogin no`
+
+### Setting up the database:
 
