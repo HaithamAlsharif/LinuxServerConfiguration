@@ -115,7 +115,7 @@ from catalog import app as application
 
 application.secret_key = '192323261443-rhiopgdtu8a27fb5o0cjs3k6v7da4nmu.apps.googleusercontent.com
 ```
-### Configure apache2
+### Configure apache2 (Help was provided by the Slack community especially @Muneera)
 - run `sudo nano /etc/apache2/sites-available/catalog.conf`
 - it has the following:
 ```
