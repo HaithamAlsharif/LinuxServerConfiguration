@@ -54,6 +54,9 @@ IP adderess and SSH ports:
   - run `ssh-keygen`
   - saved it and named it "udacityKey"
   - open udacityKey.pub
+  - the content is the following:
+    - ``` ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDh1UNQ2tih9aAJ1F9E5vi+Ucq/Z6EyiL2pcsBOldiQhW6nN15qy34HaEjkuSV9gWmC4xAqE7BaQkJls65rNY+gwzW/twY8+mYL2HC96y1b4g3r29DeBa0bpIZhXYmmkD6wRwZ1GZWPi8chBvLUkfP6IqOMgDcYcdQW09aZuiRt/UymgmpBmLp+IFTsxlq8ffr/L4eUj+5PrhEOreIpCaZMhlwOeUpiIYOGVkJTs8IDCqaY6UjPLg5/0+na18JzQXKdqFaeNGvYVXf/LLx0CUycPVf2v4mXMtcrhIwbk1GFOSr4k0EJ/86GOs7rsIvlKlkrKok7+/PfWXgjhtmphcgH imrha@MSI ```
+
   - copy the SSH rsa key.
 - go back to the server terminal
 - run `sudo mkdir .ssh`
@@ -101,7 +104,8 @@ IP adderess and SSH ports:
 ### Create the WSGI file
 - run `sudo nano /var/www/catalog/catalog.wsgi`
 - the file would include the following:
-```##!/usr/bin/python
+```
+##!/usr/bin/python
 import sys
 import logging
 logging.basicConfig(stream=sys.stderr)
@@ -114,7 +118,8 @@ application.secret_key = '192323261443-rhiopgdtu8a27fb5o0cjs3k6v7da4nmu.apps.goo
 ### Configure apache2
 - run `sudo nano /etc/apache2/sites-available/catalog.conf`
 - it has the following:
-```<VirtualHost *:80>
+```
+<VirtualHost *:80>
     ServerName http://54.85.177.225
     ServerAlias catalog ec2-54-85-177-225.us-west-2.compute.amazonaws.com/
     ServerAdmin admin@54.85.177.225
